@@ -69,10 +69,10 @@ const deleteLecture = async (req,res)=>{
         if(!lecture){
             return res.status(400).json({msg:'Lecture not found'})
         }
-        return res.status(200).json({deleted:user})
+        return res.status(200).json({deleted:lecture})
     }
     catch(err){
-        return res.status(400).json({msg:'Something went wrong'}) 
+        return res.status(400).json({msg:err.toString}) 
     }
 }
 
