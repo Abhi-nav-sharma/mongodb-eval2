@@ -15,8 +15,10 @@ const authorization= (permittedRoles)=>{
             return next()
         }
         const userOwner= await Lecture.findById(req.params.lecture_id)
-        if(userOwner.author_id===user.user_id){
-            return next()
+        if(userOwner){
+            if(userOwner.author_id===user.user_id){
+                return next()
+            }
         }
         return res.status(401).json({
             status:'failed',
