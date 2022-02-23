@@ -1,3 +1,4 @@
+const Lecture = require("../models/lectures.model")
 const User = require("../models/user.model")
 
 const authorization= (permittedRoles)=>{
@@ -11,6 +12,10 @@ const authorization= (permittedRoles)=>{
             role:{$in:permittedRoles}
         })
         if(userAllowed){
+            return next()
+        }
+        const userOwner= await Lecture.findById(req.params.lecture_id)
+        if(userOwner.author_id===user.user_id){
             return next()
         }
         return res.status(401).json({
