@@ -53,7 +53,6 @@ const signin= async (req,res)=>{
     let match
     try{
        match= await user.checkPassword(req.body.password)
-        console.log(match)
             if(!match){
                 return res.status(401).json({status:'failure', message:'Invalid email or password'})
             }
