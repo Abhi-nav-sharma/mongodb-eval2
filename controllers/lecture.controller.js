@@ -62,6 +62,20 @@ const lectureById= async(req,res)=>{
         return res.status(500).json({msg:'Something went wrong'}) 
     }
 }
+
+const deleteLecture = async (req,res)=>{
+    try{
+        const lecture= await Lecture.findOneAndDelete({_id:req.params.lecture_id})
+        if(!lecture){
+            return res.status(400).json({msg:'Lecture not found'})
+        }
+        return res.status(200).json({deleted:user})
+    }
+    catch(err){
+        return res.status(400).json({msg:'Something went wrong'}) 
+    }
+}
+
 module.exports={
-    createLecture,showLectures,updateLecture
+    createLecture,showLectures,updateLecture,lectureById,deleteLecture
 }
